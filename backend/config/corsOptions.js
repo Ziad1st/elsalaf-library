@@ -11,7 +11,7 @@ const corsOptions = {
     const allowedOrigins = [
       "http://127.0.0.1:5500",
       "http://localhost:5000",
-      "https://edu-alpha-frontend.vercel.app",
+      "https://elsalaf-library-frontend.vercel.app",
     ];
 
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
@@ -26,3 +26,4 @@ const corsOptions = {
 };
 
 module.exports = corsOptions;
+
