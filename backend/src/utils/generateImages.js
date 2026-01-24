@@ -6,7 +6,7 @@ const fontsPath = path.join(process.cwd(), "fonts");
 
 try {
     registerFont(path.join(fontsPath, "Cairo-Bold.ttf"), { family: "Cairo", weight: "bold" });
-    registerFont(path.join(fontsPath, "Amiri-Regular.ttf"), { family: "Amiri", weight: "normal" });
+    registerFont(path.join("https://fonts.googleapis.com/css2?family=Amiri"), { family: "Amiri", weight: "normal" });
     registerFont(path.join(fontsPath, "Amiri-Bold.ttf"), { family: "Amiri", weight: "bold" });
 } catch (err) {
     console.error("Failed to register fonts:", err);
@@ -253,6 +253,7 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
 };
 
 module.exports = { generateUserImage, generateBookCover };
+
 
 
 
