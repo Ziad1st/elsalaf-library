@@ -1,6 +1,7 @@
 const path = require("path");
 const { createCanvas, registerFont } = require("canvas");
 
+
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
   const words = text.split(" ");
   let line = "";
@@ -156,7 +157,7 @@ const generateUserImage = (fullName) => {
   ctx.globalAlpha = 1;
 
   // النص
-  ctx.font = "bold 40px 'Cairo', sans-serif";
+  ctx.font = "bold 40px 'Amiri', 'DejaVu Sans', 'FreeSans', serif";
   ctx.fillStyle = "#ffffff";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
@@ -218,7 +219,7 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
   ctx.strokeRect(55, 55, width - 110, height - 110);
 
   // عنوان الكتاب
-  ctx.font = "bold 64px 'Cairo', sans-serif";
+  ctx.font = "bold 64px 'Amiri', 'DejaVu Sans', 'FreeSans', serif";
   ctx.fillStyle = "#ffffff";
   ctx.textAlign = "center";
 
@@ -228,11 +229,11 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
   drawDivider(ctx, width / 2, 420, 220, selected[1]);
 
   // اسم المؤلف
-  ctx.font = "bold 20px 'Cairo', sans-serif";
+  ctx.font = "bold 24px 'Amiri', 'DejaVu Sans', 'FreeSans', serif";
   ctx.fillText(formatAuthorName(author), width / 2, height - 170);
 
   // اسم الدار
-  ctx.font = "16px 'Cairo', sans-serif";
+  ctx.font = "bold 20px 'Amiri', 'DejaVu Sans', 'FreeSans', serif";
   ctx.globalAlpha = 0.8;
   ctx.fillText(publisher, width / 2, height - 80);
   ctx.globalAlpha = 1;
@@ -241,3 +242,4 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
 };
 
 module.exports = { generateUserImage, generateBookCover };
+
