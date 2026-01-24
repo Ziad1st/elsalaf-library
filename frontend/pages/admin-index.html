@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الرئيسية | لوحة التحكم</title>
+    <script src="../assets/tailwindcss/browser@4.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body class="bg-[#f4f7fe] min-h-screen flex">
+    <aside
+      class="w-72 bg-[#0b1437] text-white hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl"
+    >
+      <div class="p-8 text-center border-b border-slate-700">
+        <h1 class="text-2xl font-black text-[#8e735b] tracking-widest">
+          <a class="hover:opacity-70 transition" href="home.html"
+            >مكتبة السلف</a
+          >
+        </h1>
+        <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">
+          لوحة الإدارة الرئيسية
+        </p>
+      </div>
+
+      <nav class="flex-1 px-4 py-6 space-y-2">
+        <a
+          href="admin-index.html"
+          class="flex items-center gap-4 p-4 rounded-2xl bg-[#8e735b] shadow-lg shadow-[#8e735b]/20 text-white"
+        >
+          <i class="fa-solid fa-house-chimney"></i>
+          <span class="font-bold">الرئسية</span>
+        </a>
+        <a
+          href="admin-books.html"
+          class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all"
+        >
+          <i class="fa-solid fa-book-open"></i>
+          <span class="font-bold">إدارة الكتب</span>
+        </a>
+        <a
+          href="admin-users.html"
+          class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all"
+        >
+          <i class="fa-solid fa-users"></i>
+          <span class="font-bold">المستخدمين</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="flex-1 p-4 lg:p-10 overflow-x-hidden">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4"
+      >
+        <h2 class="text-3xl font-black text-[#1b2559]">الإحصائيات العامة</h2>
+        <div
+          class="bg-white p-2 rounded-2xl border-[0] border-[#8e735b] border-dashed shadow-sm flex items-center gap-4 px-6 border"
+        >
+          <div class="text-right">
+            <p class="text-[10px] text-slate-400 font-bold">مدير نظام</p>
+            <p id="adminName" class="text-xs font-bold text-[#1b2559]">(---)</p>
+          </div>
+          <div
+            class="w-10 h-10 rounded-xl bg-[#8e735b] flex items-center justify-center text-white"
+          >
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div
+          class="bg-white p-6 rounded-[30px] shadow-sm border-none relative overflow-hidden group"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 rounded-2xl bg-[#f4f7fe] flex items-center justify-center text-[#8e735b] text-xl"
+            >
+              <i class="fa-solid fa-book"></i>
+            </div>
+            <div>
+              <p class="text-sm font-bold text-slate-400">إجمالي الكتب</p>
+              <h4 id="totalBooks" class="text-2xl font-black text-[#1b2559]">
+                (---)
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-10 bg-white p-8 rounded-[30px] shadow-sm">
+        <h3 class="text-xl font-black text-[#1b2559] mb-6">
+          نشاط التحميل خلال الأسبوع
+        </h3>
+        <div
+          class="h-64 bg-slate-50 rounded-2xl flex items-end justify-around p-4 gap-2"
+        >
+          <div class="w-full bg-[#8e735b]/20 rounded-t-lg h-[40%]"></div>
+          <div class="w-full bg-[#8e735b]/40 rounded-t-lg h-[60%]"></div>
+          <div class="w-full bg-[#8e735b] rounded-t-lg h-[90%] shadow-lg"></div>
+          <div class="w-full bg-[#8e735b]/60 rounded-t-lg h-[50%]"></div>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="../js/utils/admin-pannel-page.js"></script>
+
+    <script type="module" src="../js/admin-index.js"></script>
+  </body>
+</html>

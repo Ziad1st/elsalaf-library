@@ -1,0 +1,483 @@
+<!doctype html>
+<html dir="rtl" lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مكتبة السلف | الرئسية</title>
+    <script src="../assets/tailwindcss/browser@4.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles/main.css" />
+  </head>
+  <body>
+    <!-- S HEADER ------------------------------------ -->
+    <header
+      class="sticky top-0 z-50 shadow-sm border-b transition-all duration-300"
+      style="
+        background-color: var(--bg-body);
+        border-color: var(--border-color);
+      "
+      id="header"
+    >
+      <div
+        class="max-w-7xl nav mx-auto px-4 flex flex-col lg:flex-row lg:items-center lg:h-20 py-3 lg:py-0"
+      >
+        <div class="flex items-center justify-between w-full lg:w-auto">
+          <h1
+            class="text-xl md:text-2xl font-black text-[#8e735b] tracking-widest shrink-0"
+          >
+            <a class="hover:opacity-70 transition" href="home.html"
+              >مكتبة السلف</a
+            >
+          </h1>
+
+          <nav class="hidden lg:flex items-center gap-8 mx-10" id="navbar">
+            <a
+              href="home.html"
+              class="text-sm font-medium transition hover:text-[#8e735b] relative group"
+              style="color: var(--text-main)"
+            >
+              الرئيسية
+            </a>
+            <a
+              href="library-categories.html"
+              class="text-sm font-medium transition hover:text-[#8e735b] opacity-70 hover:opacity-100"
+              style="color: var(--text-main)"
+              >الأقسام</a
+            >
+            <a
+              href="library-books.html"
+              class="text-sm font-medium transition hover:text-[#8e735b] opacity-70 hover:opacity-100"
+              style="color: var(--text-main)"
+              >الكتب</a
+            >
+          </nav>
+        </div>
+
+        <div class="w-full lg:flex-1 lg:max-w-md mt-4 lg:mt-0 lg:mx-auto">
+          <div class="relative group">
+            <input
+              type="text"
+              id="booksSearch"
+              autocomplete="off"
+              placeholder="ابحث عن كتاب أو مؤلف..."
+              class="w-full py-2.5 pr-11 pl-4 rounded-2xl border outline-none transition-all text-right text-sm shadow-sm focus:ring-2"
+              style="
+                background-color: var(--bg-card);
+                border-color: var(--border-color);
+                color: var(--text-main);
+                --tw-ring-color: var(--accent);
+              "
+            />
+            <span
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-[#8e735b] transition-colors"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <nav
+          id="navbar"
+          class="lg:hidden flex items-center justify-around w-full mt-4 pt-3 border-t border-slate-100"
+        >
+          <a
+            href="home.html"
+            class="text-xs font-medium opacity-60"
+            style="color: var(--text-main)"
+            >الرئسية</a
+          >
+          <a
+            href="library-categories.html"
+            class="text-xs font-medium opacity-60"
+            style="color: var(--text-main)"
+            >الأقسام</a
+          >
+          <a
+            href="add-book.html"
+            class="text-xs font-medium opacity-60"
+            style="color: var(--text-main)"
+            >الكتب</a
+          >
+
+          <div class="flex items-center gap-3 lg:order-last">
+            <a
+              class="px-6 login-page py-2 rounded-xl font-bold text-white transition shadow-md hover:brightness-110 active:scale-95 text-sm"
+              style="background-color: var(--accent)"
+            >
+              دخول
+            </a>
+          </div>
+        </nav>
+        <div class="hidden lg:flex items-center gap-3 lg:order-last">
+          <a
+            class="px-6 login-page py-2 rounded-xl font-bold text-white transition shadow-md hover:brightness-110 active:scale-95 text-sm"
+            style="background-color: var(--accent)"
+          >
+            دخول
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- E HEADER ------------------------------------ -->
+
+    <!-- -------    -------    -------    -------    -------    -------    -------    ------- -->
+    <main class="max-w-6xl mx-auto px-6 py-12">
+      <div id="loader" class="animate-pulse flex flex-col md:flex-row gap-12">
+        <div class="w-full md:w-80 h-[550px] bg-gray-200 rounded-2xl"></div>
+        <div class="flex-1 space-y-6">
+          <div class="h-12 bg-gray-200 rounded w-3/4"></div>
+          <div class="h-6 bg-gray-200 rounded w-1/4"></div>
+          <div class="h-40 bg-gray-200 rounded w-full"></div>
+        </div>
+      </div>
+
+      <div
+        id="book-details"
+        class="hidden flex flex-col md:flex-row gap-12 items-start"
+      >
+        <div class="w-full md:w-80 flex-shrink-0">
+          <div class="relative group">
+            <div class="book-wrapper">
+              <div class="book-container group">
+                <img
+                  id="book-cover"
+                  src="../assets/images/كتب السلف وأهل السنة.jfif"
+                  alt="غلاف الكتاب"
+                />
+                <div class="book-shadow"></div>
+              </div>
+            </div>
+            <div
+              id="book-category-tag"
+              class="absolute top-4 right-4 bg-black/60 backdrop-blur-md text-white px-4 py-1 rounded-full text-xs font-bold"
+            ></div>
+          </div>
+
+          <div class="mt-8 flex flex-col gap-3">
+            <a
+              id="download-btn"
+              href="#"
+              target="_blank"
+              class="w-full text-white py-4 rounded-xl flex items-center justify-center gap-3 font-bold shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+              style="background-color: #8e735b !important"
+            >
+              <i class="fa-solid fa-file-pdf text-xl"></i>
+              تحميل وقراءة الكتاب
+            </a>
+            <button
+              id="read-from-archive"
+              class="popup-toggle open-popup w-full border-2 border-gray-100 bg-black text-white hover:bg-white hover:text-black py-4 rounded-xl flex items-center justify-center gap-3 font-bold hover:bg-gray-50 transition-all"
+            >
+              <span class="archive.org-icon">
+                <img
+                  style="border-radius: 3px"
+                  width="19"
+                  height="19"
+                  alt="archive.org"
+                  src="https://archive.org/favicon.ico"
+                />
+              </span>
+              المعاينة المباشرة<small style="color: #a68d77"
+                >(archive.org)</small
+              >
+            </button>
+            <button
+              class="w-full border-2 border-gray-100 bg-white text-gray-700 py-4 rounded-xl flex items-center justify-center gap-3 font-bold hover:bg-gray-50 transition-all"
+            >
+              <i class="fa-regular fa-bookmark"></i>
+              حفظ في المفضلة
+            </button>
+          </div>
+        </div>
+
+        <div class="flex-1">
+          <div class="mb-8">
+            <h1
+              id="book-title"
+              class="text-4xl md:text-5xl font-extrabold text-[#1a2a3a] leading-tight mb-4"
+            ></h1>
+            <div class="flex flex-wrap items-center gap-4 text-lg">
+              <span id="book-author" class="font-bold text-slate-600"> </span>
+              <span
+                id="author-death-badge"
+                class="hidden bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1 rounded-lg text-sm font-bold"
+              >
+              </span>
+            </div>
+          </div>
+
+          <div
+            class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 bg-white p-6 rounded-2xl shadow-sm border border-gray-100"
+          >
+            <div class="text-center">
+              <p class="text-gray-400 text-xs mb-1">التقييم</p>
+              <p class="font-black text-xl text-amber-500">
+                <i class="fa-solid fa-star ml-1 text-sm"></i
+                ><span id="book-rate">--</span>
+              </p>
+            </div>
+            <div class="text-center border-r border-gray-100">
+              <p class="text-gray-400 text-xs mb-1">المشاهدات</p>
+              <p id="book-views" class="font-black text-xl">--</p>
+            </div>
+            <div class="text-center border-r border-gray-100">
+              <p class="text-gray-400 text-xs mb-1">الصفحات</p>
+              <p id="book-pages" class="font-black text-xl">--</p>
+            </div>
+            <div class="text-center border-r border-gray-100">
+              <p class="text-gray-400 text-xs mb-1">التحميلات</p>
+              <p id="book-downloads" class="font-black text-xl">--</p>
+            </div>
+          </div>
+
+          <div class="mb-10">
+            <h3
+              class="text-xl font-bold text-[#1a2a3a] mb-4 flex items-center gap-2"
+            >
+              <i class="fa-solid fa-feather-pointed text-accent"></i>
+              نبذة عن الكتاب
+            </h3>
+            <p
+              id="book-description"
+              class="text-gray-600 leading-relaxed text-lg text-justify"
+            ></p>
+          </div>
+
+          <div
+            class="bg-slate-50 p-8 rounded-3xl border border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-8"
+          >
+            <div class="space-y-4">
+              <div class="flex justify-between border-b border-slate-200 pb-2">
+                <span class="text-slate-400">دار النشر</span>
+                <span id="book-publisher" class="font-bold text-[#1a2a3a]"
+                  >--</span
+                >
+              </div>
+              <div class="flex justify-between border-b border-slate-200 pb-2">
+                <span class="text-slate-400">القسم</span>
+                <span id="book-category" class="font-bold text-[#1a2a3a]"
+                  >--</span
+                >
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="flex justify-between border-b border-slate-200 pb-2">
+                <span class="text-slate-400">تاريخ الإضافة</span>
+                <span id="book-created-at" class="font-bold text-[#1a2a3a]"
+                  >--</span
+                >
+              </div>
+              <div class="flex justify-between border-b border-slate-200 pb-2">
+                <span class="text-slate-400">تنسيق الكتاب</span>
+                <span class="font-bold text-[#1a2a3a]">PDF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="bookPopup"
+      class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+    >
+      <div
+        class="relative bg-white w-full max-w-5xl h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col"
+      >
+        <div
+          class="p-4 frame-loader border-b flex justify-between items-center bg-slate-50"
+        >
+          <h3 class="font-bold text-slate-700 flex items-center gap-2">
+            <i class="fa-solid fa-book-open text-[#8e735b]"></i>
+            المعاينة المباشرة (Archive.org)
+          </h3>
+          <button
+            class="popup-toggle close-popup w-10 h-10 flex items-center justify-center rounded-full hover:bg-red-50 text-red-500 transition-colors"
+          >
+            <i class="fa-solid fa-xmark text-xl popup-toggle close-popup"></i>
+          </button>
+        </div>
+
+        <div
+          id="popupLoader"
+          class="absolute inset-0 top-16 flex flex-col items-center justify-center bg-white z-10"
+        >
+          <div
+            class="w-12 h-12 border-4 border-slate-200 border-t-[#8e735b] rounded-full animate-spin"
+          ></div>
+          <p class="mt-4 text-slate-500 font-bold">
+            جاري تحميل صفحات الكتاب...
+          </p>
+        </div>
+
+        <div class="flex-1 w-full h-full bg-slate-100">
+          <iframe
+            id="archiveIframe"
+            class="w-full h-full border-0 opacity-0 transition-opacity duration-500"
+            webkitallowfullscreen="true"
+            mozallowfullscreen="true"
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+      </div>
+    </div>
+    <!-- -------    -------    -------    -------    -------    -------    -------    ------- -->
+
+    <!-- S FOOTER ------------------------------------ -->
+    <footer
+      class="pt-16 pb-8 border-t"
+      style="
+        background-color: var(--bg-body);
+        border-color: var(--border-color);
+      "
+    >
+      <div class="max-w-7xl mx-auto px-4">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 text-right"
+        >
+          <div class="space-y-4">
+            <div class="flex items-center gap-3">
+              <span class="font-bold text-xl" style="color: var(--primary)"
+                >مكتبة السلف</span
+              >
+            </div>
+            <p class="text-sm leading-7" style="color: var(--text-muted)">
+              منصة رقمية تهدف إلى تقريب كنوز التراث الإسلامي وكتب السلف الصالح
+              للقراء، مع التركيز على جودة المحتوى وراحة المستخدم.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="font-bold mb-6" style="color: var(--primary)">
+              روابط سريعة
+            </h4>
+            <ul class="space-y-4 text-sm" style="color: var(--text-main)">
+              <li>
+                <a href="#" class="hover:opacity-70 transition">الرئيسية</a>
+              </li>
+              <li>
+                <a href="#" class="hover:opacity-70 transition">أحدث الكتب</a>
+              </li>
+              <li>
+                <a href="#" class="hover:opacity-70 transition"
+                  >الأقسام العلمية</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:opacity-70 transition">إنضم كناشر</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold mb-6" style="color: var(--primary)">
+              المساعدة والسياسات
+            </h4>
+            <ul class="space-y-4 text-sm" style="color: var(--text-main)">
+              <li>
+                <a href="#" class="hover:opacity-70 transition">حقوق النشر</a>
+              </li>
+              <li>
+                <a href="#" class="hover:opacity-70 transition"
+                  >سياسة الخصوصية</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:opacity-70 transition"
+                  >شروط الاستخدام</a
+                >
+              </li>
+              <li>
+                <a href="#" class="hover:opacity-70 transition">اتصل بنا</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-bold mb-6" style="color: var(--primary)">
+              اشترك في النشرة البريدية
+            </h4>
+            <p class="text-xs mb-4" style="color: var(--text-muted)">
+              صلك أحدث الكتب والمخطوطات المضافة أسبوعياً.
+            </p>
+            <form class="flex flex-col gap-2">
+              <input
+                type="email"
+                placeholder="بريدك الإلكتروني"
+                class="px-4 py-2.5 rounded-xl border text-sm outline-none focus:ring-1"
+                style="
+                  background-color: var(--bg-card);
+                  border-color: var(--border-color);
+                  --tw-ring-color: var(--accent);
+                "
+              />
+              <button
+                class="w-full py-2.5 rounded-xl font-bold text-white text-sm transition shadow-sm hover:opacity-90"
+                style="background-color: var(--accent)"
+              >
+                اشتراك
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div
+          class="pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-6"
+          style="border-color: var(--border-color)"
+        >
+          <p class="text-xs font-medium" style="color: var(--text-muted)">
+            &copy; 2026 مكتبة السلف العلمية. جميع الحقوق محفوظة لطلبة العلم.
+          </p>
+
+          <div class="flex items-center gap-4">
+            <a
+              href="#"
+              class="w-8 h-8 rounded-full flex items-center justify-center border hover:bg-white transition"
+              style="border-color: var(--border-color); color: var(--text-main)"
+            >
+              <span class="text-xs">FB</span>
+            </a>
+            <a
+              href="#"
+              class="w-8 h-8 rounded-full flex items-center justify-center border hover:bg-white transition"
+              style="border-color: var(--border-color); color: var(--text-main)"
+            >
+              <span class="text-xs">X</span>
+            </a>
+            <a
+              href="#"
+              class="w-8 h-8 rounded-full flex items-center justify-center border hover:bg-white transition"
+              style="border-color: var(--border-color); color: var(--text-main)"
+            >
+              <span class="text-xs">TG</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- E FOTER ------------------------------------ -->
+
+    <!-- SCRIPTS    ------------------------------------ -->
+    <script type="module" src="../js/book-details.js"></script>
+    <script type="module" src="../js/utils/admin-pannel-page.js"></script>
+
+    <script type="module" src="../js/utils/headerAndNavControl.js"></script>
+  </body>
+</html>

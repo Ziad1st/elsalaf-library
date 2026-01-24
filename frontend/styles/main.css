@@ -1,0 +1,207 @@
+/*>> Fonts*/
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Kufi+Arabic:wght@100..900&family=Noto+Sans+Arabic:wght@100..900&display=swap");
+/** Usage
+    font-family: "Inter" || "Cairo" || "Noto Kufi Arabic" || "Noto Sans Arabic" || , sans-serif || ;
+*/
+
+:root {
+  /* ألوان مريحة للعين - ستايل القراءة والتركيز */
+  --bg-body: #f5f2ed; /* لون ورقي خفيف جداً يقلل إجهاد العين */
+  --bg-card: #ffffff; /* أبيض صريح للكروت لتمييزها */
+  --primary: #2c3e50; /* كحلي رمادي رزين للعناوين */
+  --accent: #8e735b; /* لون بني ترابي هادئ للأزرار والروابط */
+  --text-main: #34495e; /* رمادي غامق مريح للقراءة */
+  --text-muted: #7f8c8d; /* رمادي فاتح للنصوص الفرعية */
+  --border-color: #e0dcd5; /* لون الحواف */
+
+  /* إعدادات إضافية للتركيز */
+  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.05);
+  --radius: 12px;
+
+  --banner-gradient: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  --accent-light: #a68d77; /* درجة أفتح قليلاً من البني للتباين */
+}
+
+body {
+  background: var(--bg-body);
+  position: relative;
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-blend-mode: darken;
+}
+
+button:disabled:hover {
+  background: initial;
+  scale: initial;
+}
+
+.btm-line {
+  position: relative;
+}
+
+.btm-line::after {
+  content: "";
+  width: 30%;
+  height: 3px;
+  position: absolute;
+  right: 0%;
+  bottom: 0;
+  /* transform: translateX(-50%); */
+  background-color: #8e735b;
+  border-radius: 3px 0 0 3px;
+}
+
+.center-container {
+  margin: 0 auto;
+  width: 70%;
+}
+
+/* حاوية المنظور */
+.book-wrapper {
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.book-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  transform-style: preserve-3d;
+  /* تدوير لليمين ليظهر الكعب على اليمين والصفحات على اليسار */
+  transform: rotateY(20deg) rotateX(5deg);
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.book-container:hover {
+  transform: rotateY(5deg) rotateX(0deg); /* يتعدل عند الماوس */
+}
+
+#book-cover {
+  width: 100%;
+  height: auto;
+  /* حواف الكتاب: اليسار دائري (الصفحات) واليمين حاد (الكعب) */
+  border-radius: 15px 4px 4px 15px;
+  box-shadow:
+    -7px 5px 1px 0px #a68d77c2,
+    2px 0 5px rgba(255, 255, 255, 0.2) inset;
+  display: block;
+  z-index: 2;
+}
+
+/* سُمك صفحات الكتاب (الآن على جهة اليسار) */
+.book-container::after {
+  content: "";
+  position: absolute;
+  top: 1%;
+  right: 99%; /* تم نقله لجهة اليسار */
+  width: 35px; /* سُمك المجلد */
+  height: 98%;
+  background: #f0f0f0;
+  /* تدرج لوني يظهر الخطوط الرفيعة للورق */
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%),
+    repeating-linear-gradient(
+      90deg,
+      #e0e0e0 0px,
+      #e0e0e0 1px,
+      #f5f5f5 1px,
+      #f5f5f5 3px
+    );
+  transform: rotateY(-90deg);
+  transform-origin: right;
+  border-radius: 4px 0 0 4px;
+}
+
+/* الظل الأرضي الواقعي */
+.book-shadow {
+  position: absolute;
+  bottom: -15px;
+  right: -10%;
+  width: 110%;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.25);
+  filter: blur(20px);
+  border-radius: 50%;
+  z-index: -1;
+  transform: rotateX(90deg);
+}
+
+@media screen and (max-width: 800px) {
+  .center-container {
+    width: auto;
+  }
+}
+
+nav a.active {
+  color: #8e735b !important;
+  position: relative;
+  font-weight: bold;
+  opacity: 1 !important;
+}
+
+nav a.active::after {
+  content: "";
+  width: 85%;
+  height: 3px;
+  border-radius: 3px;
+  position: absolute;
+  bottom: -10px;
+  left: 51%;
+  transform: translateX(-50%);
+  background-color: #8e735b;
+}
+
+.admin-pannel-page {
+  width: max-content;
+  position: fixed;
+  background-color: var(--bg-body);
+  color: #8e735b;
+  border: 1.4px dotted #8e735b;
+  padding: 3px 40px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  font-weight: normal;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  bottom: 10px;
+  right: 10px;
+  /* left: 50%; */
+  /* right: -105px; */
+  /* transform: rotate(270deg) translateY(-50%); */
+  /* top: 70%; */
+  z-index: 100;
+}
+
+.admin-pannel-page.banned {
+  background: #ffe6e6;
+  color: #f44336;
+  font-weight: bolder;
+  border-radius: 3px;
+  cursor: default !important;
+  padding: 3px 30px;
+  font-size: 14px;
+}
+
+.admin-pannel-page:hover {
+  background-color: #8e735b;
+  color: #fff;
+  border-radius: var(--radius);
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/*
+Source - https://stackoverflow.com/q
+Posted by Ilan Yashuk
+Retrieved 2026-01-20, License - CC BY-SA 4.0
+*/

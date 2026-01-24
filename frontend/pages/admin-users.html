@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>إدارة المستخدمين | لوحة التحكم</title>
+    <script src="../assets/tailwindcss/browser@4.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      select {
+        -moz-appearance: none !important;
+        -webkit-appearance: none !important;
+        -ms-appearance: none !important;
+        -o-appearance: none !important;
+        appearance: none !important;
+      }
+      select::-ms-expand {
+        display: none;
+      }
+      :root {
+        --accent: #8e735b;
+        --bg-main: #f4f7fe;
+        --sidebar-dark: #0b1437;
+      }
+      body {
+        background-color: var(--bg-main);
+        font-family: "Segoe UI", sans-serif;
+      }
+      .sidebar-active {
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 10px 20px rgba(142, 115, 91, 0.2);
+      }
+      /* أنماط مخصصة للرتب */
+      .role-admin {
+        background-color: #fef2f2;
+        color: #ef4444;
+        border: 1px solid #fee2e2;
+      }
+      .role-publisher {
+        background-color: #f0fdf4;
+        color: #22c55e;
+        border: 1px solid #dcfce7;
+      }
+      .role-user {
+        background-color: #f8fafc;
+        color: #64748b;
+        border: 1px solid #f1f5f9;
+      }
+    </style>
+  </head>
+  <body class="flex h-screen overflow-hidden">
+    <aside
+      class="w-72 bg-[#0b1437] text-white hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl"
+    >
+      <div class="p-8 text-center border-b border-slate-700">
+        <h1 class="text-2xl font-black text-[#8e735b] tracking-widest">
+          <a class="hover:opacity-70 transition" href="home.html"
+            >مكتبة السلف</a
+          >
+        </h1>
+        <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">
+          لوحة الإدارة الرئيسية
+        </p>
+      </div>
+      <nav class="flex-1 px-4 py-6 space-y-2">
+        <a
+          href="admin-index.html"
+          class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+        >
+          <i class="fa-solid fa-house-chimney"></i>
+          <span class="font-bold">الرئسية</span>
+        </a>
+        <a
+          href="admin-books.html"
+          class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+        >
+          <i class="fa-solid fa-book-open"></i>
+          <span class="font-bold">إدارة الكتب</span>
+        </a>
+        <a
+          href="admin-users.html"
+          class="flex items-center gap-4 p-4 rounded-2xl sidebar-active"
+        >
+          <i class="fa-solid fa-users"></i>
+          <span class="font-bold">المستخدمين</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-4 lg:p-10">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4"
+      >
+        <div>
+          <h2 class="text-3xl font-black text-[#1b2559]">إدارة الأعضاء</h2>
+          <p class="text-slate-400 text-sm mt-1">
+            التحكم في صلاحيات المستخدمين ومراقبة الحسابات
+          </p>
+        </div>
+        <div class="flex gap-3">
+          <div
+            class="bg-white px-6 py-3 rounded-2xl shadow-sm border border-white"
+          >
+            <p class="text-[10px] text-slate-400 font-bold uppercase">
+              إجمالي الأعضاء
+            </p>
+            <p id="usersCount" class="text-lg font-black text-[#1b2559]">
+              1,050
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-white p-5 rounded-[25px] shadow-sm mb-6 flex flex-col md:flex-row gap-4 items-center"
+      >
+        <div class="relative flex-1 w-full">
+          <input
+            type="text"
+            autocomplete="off"
+            
+            id="searchUsersInput"
+            placeholder="ابحث عن مستخدم بالاسم أو البريد الإلكتروني أو ال ID..."
+            class="w-full bg-[#f4f7fe] p-3 pr-11 rounded-xl outline-none focus:ring-2 focus:ring-[#8e735b]/20 text-sm"
+          />
+          <i
+            class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-slate-400"
+          ></i>
+        </div>
+        <div class="relative w-full md:w-56 group" id="customSelectContainer">
+          <button
+            type="button"
+            class="bg-[#1b2559] text-white px-5 py-3 rounded-2xl font-bold text-sm w-full flex items-center justify-between gap-2 shadow-lg transition-all active:scale-95 focus:outline-none"
+          >
+            <i class="fa-solid fa-filter text-[10px] opacity-70"></i>
+            <span id="selectedLabel">تصفية</span>
+            <i
+              class="fa-solid fa-chevron-down text-[10px] opacity-50 transition-transform group-focus-within:rotate-180"
+            ></i>
+          </button>
+
+          <div
+            class="absolute top-full mt-2 w-full bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 hidden group-focus-within:block z-50 animate-in fade-in slide-in-from-top-2 duration-200 overflow-hidden"
+          >
+            <div
+              class="filterVal flex z-50 items-center gap-3 px-4 py-3 cursor-pointer hover:bg-slate-50 transition-colors group/item"
+            >
+              <div class="w-2 h-2 filterVal rounded-full bg-amber-500"></div>
+              <button class="cursor-pointer  w-full text-[#1b2559] text-right filterVal font-semibold text-sm"
+                >ناشر</span
+              >
+            </div>
+
+            <div
+              class="filterVal flex z-50 items-center gap-3 px-4 py-3 cursor-pointer hover:bg-slate-50 transition-colors group/item"
+            >
+              <div class="w-2 h-2 filterVal rounded-full bg-blue-500"></div>
+              <button class="cursor-pointer  w-full text-[#1b2559] text-right filterVal font-semibold text-sm"
+                >مدير</button 
+              >
+            </div>
+
+            <div
+              class="filterVal flex z-50 items-center gap-3 px-4 py-3 cursor-pointer hover:bg-slate-50 transition-colors group/item"
+            >
+              <div class="w-2 h-2 filterVal rounded-full bg-green-600"></div>
+              <button class="cursor-pointer  w-full text-[#1b2559] text-right filterVal font-semibold text-sm"
+                >عادي</button
+              >
+            </div>
+
+            <div
+              class="filterVal flex z-50 items-center gap-3 px-4 py-3 cursor-pointer hover:bg-red-50 transition-colors group/item"
+            >
+              <div class="w-2 h-2 filterVal rounded-full bg-red-600"></div>
+              <button class="cursor-pointer  w-full text-[#1b2559] text-right text-red-600 filterVal font-bold text-sm"
+                >محظور</button
+              >
+            </div>
+
+            <hr class="my-1 border-slate-100" />
+
+            <div
+              class="filterVal flex z-50 items-center justify-center gap-2 px-4 py-3 cursor-pointer hover:bg-blue-400 hover:text-[#1b2559] transition-colors"
+            >
+              <i class="fa-solid fa-user-check text-xs"></i>
+              <button class="cursor-pointer  w-full text-[#1b2559] text-right font-bold text-s filterVal">غير محظور</button>
+            </div>
+          </div>
+        </div>
+
+        <input type="hidden" name="role" id="filterSelect" value="" />
+      </div>
+
+      <div
+        class="bg-white rounded-[30px] shadow-sm overflow-hidden border border-white"
+      >
+        <div class="overflow-x-auto">
+          <table class="w-full text-right border-collapse">
+            <thead>
+              <tr
+                class="bg-slate-50/50 border-b border-slate-100 text-slate-400 text-[11px] uppercase tracking-widest font-bold"
+              >
+                <th class="p-6">المستخدم</th>
+                <th class="p-6">الرتبة</th>
+                <th class="p-6">تاريخ الانضمام</th>
+                <th class="p-6">الحالة</th>
+                <th class="p-6 text-center">التحكم</th>
+              </tr>
+            </thead>
+            <tbody
+              id="users-container"
+              class="divide-y divide-slate-50"
+            ></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="userModal"
+      class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-4"
+    >
+      <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+
+      <div
+        class="relative bg-white rounded-[30px] shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col translate-y-4 transition-all duration-300"
+        id="userModalContent"
+      >
+        <div
+          class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50"
+        >
+          <h3 class="text-xl font-black text-[#1b2559]">تفاصيل المستخدم</h3>
+          <button
+            class="close-popup text-gray-400 hover:text-red-500 transition-colors"
+          >
+            <i class="fa-solid fa-xmark text-2xl"></i>
+          </button>
+        </div>
+
+        <div class="p-8 overflow-y-auto custom-scrollbar">
+          <div class="mb-8">
+            <label
+              class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2"
+            >
+              (ID) الخاص بالمستخدم
+            </label>
+            <div
+              class="flex items-center gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100"
+            >
+              <code
+                id="modalUserId"
+                class="userData text-sm font-mono text-[#1b2559] flex-1"
+                >64f123...</code
+              >
+              <button
+                class="copyUserDataBtn text-[#8e735b] hover:scale-110 transition-transform"
+              >
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </div>
+            <label
+              class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2"
+              >إسم المستخدم</label
+            >
+            <div
+              class="flex items-center gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100"
+            >
+              <code
+                id="modalUserName"
+                class="userData text-sm font-mono text-[#1b2559] flex-1"
+                >Ziad</code
+              >
+              <button
+                class="copyUserDataBtn text-[#8e735b] hover:scale-110 transition-transform"
+              >
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </div>
+            <label
+              class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2"
+              >(EMAIL) المستخدم</label
+            >
+            <div
+              class="flex items-center gap-3 bg-slate-50 p-4 rounded-2xl border border-slate-100"
+            >
+              <code
+                id="modalUserEmail"
+                class="userData text-sm font-mono text-[#1b2559] flex-1"
+                >Ziad@gmail.com</code
+              >
+              <button
+                class="copyUserDataBtn text-[#8e735b] hover:scale-110 transition-transform"
+              >
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label
+              class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-4"
+              >الكتب التي أضافها (<span id="publisherBooksCount">0</span
+              >)</label
+            >
+          </div>
+        </div>
+
+        <div
+          class="p-6 border-t border-gray-100 text-left flex justify-between gap-3"
+        >
+          <a
+            href="admin-books.html"
+            class="goToUserBooks px-8 py-3 w-full bg-[#1b2559] text-white rounded-xl font-bold text-center hover:shadow-lg hover:rounded-[10px] hover:bg-[#1b2559]/50 hover:text-[#1b2559] transition-all"
+          >
+            الذهاب للكتب التي أضافها المستخدم
+          </a>
+          <button
+            class="close-popup cursor-pointer px-8 py-3 bg-transparent border-[#1b2559] border-[2px] text-[#1b2559] rounded-xl font-bold hover:scale-[1.10] hover:rounded-[10px] hover:shadow-lg hover:text-white hover:bg-[#1b2559] transition-all"
+          >
+            إغلاق
+          </button>
+        </div>
+      </div>
+    </div>
+    <script type="module">
+      import { filterUsers } from "../js/admin-users.js";
+      window.addEventListener("click", (e) => {
+        if (e.target.closest(".filterVal")) {
+          document.getElementById("selectedLabel").innerText =
+            e.target.innerText;
+          document.getElementById("filterSelect").value =
+            e.target.innerText == "مدير"
+              ? "admin"
+              : e.target.innerText == "ناشر"
+                ? "publisher"
+                : e.target.innerText == "عادي"
+                  ? "user"
+                  :e.target.innerText == "غير محظور" ? "active" : "banned";
+          document.activeElement.blur();
+          filterUsers(document.getElementById("filterSelect").value);
+        }
+      });
+    </script>
+    <script type="module" src="../js/utils/admin-pannel-page.js"></script>
+
+    <script type="module" src="../js/admin-users.js"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "elsalaf-library",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Ziad MAS",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "arabic-reshaper": "^1.1.0",
+    "bcrypt": "^6.0.0",
+    "bidi-js": "^1.0.3",
+    "canvas": "^3.2.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.3",
+    "nodemon": "^3.1.11"
+  }
+}

@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../assets/tailwindcss/browser@4.js"></script>
+
+    <title>مكتبة السلف - رفع الكتب (JSON)</title>
+    <script src="../assets/tailwindcss/browser@4.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --accent: #8e735b;
+        --bg-main: #f4f7fe;
+        --sidebar-dark: #0b1437;
+      }
+      body {
+        background-color: var(--bg-main);
+        font-family: "Segoe UI", sans-serif;
+      }
+      .sidebar-active {
+        background: var(--accent);
+        color: white;
+        box-shadow: 0 10px 20px rgba(142, 115, 91, 0.2);
+      }
+    </style>
+  </head>
+  <body class="flex h-screen overflow-hidden">
+    <aside
+      class="w-72 bg-[#0b1437] text-white hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl"
+    >
+      <div class="p-8 text-center border-b border-slate-700">
+        <h1 class="text-2xl font-black text-[#8e735b] tracking-widest">
+          <a class="hover:opacity-70 transition" href="home.html"
+            >مكتبة السلف</a
+          >
+        </h1>
+        <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">
+          لوحة الإدارة الرئيسية
+        </p>
+      </div>
+      <nav class="flex-1 px-4 py-6 space-y-2">
+        <a
+          href="admin-index.html"
+          class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+        >
+          <i class="fa-solid fa-house-chimney"></i>
+          <span class="font-bold">الرئسية</span>
+        </a>
+        <a
+          href="admin-books.html"
+          class="flex items-center gap-4 p-4 rounded-2xl sidebar-active"
+        >
+          <i class="fa-solid fa-book-open"></i>
+          <span class="font-bold">إدارة الكتب</span>
+        </a>
+        <a
+          href="admin-users.html"
+          class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all"
+        >
+          <i class="fa-solid fa-users"></i>
+          <span class="font-bold">المستخدمين</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-4 lg:p-10">
+      <div class="mb-8 flex flex-col justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <button
+            onclick="window.history.back()"
+            class="w-10 h-10 bg-white rounded-xl shadow-sm flex items-center justify-center text-slate-400 hover:text-[#8e735b] transition-colors"
+          >
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <div>
+            <h2 class="text-3xl font-black text-[#1b2559]">
+              رفع بيانات الكتب (JSON)
+            </h2>
+            <p class="text-slate-400 text-sm mt-1 text-right">
+              أضف مجموعة كتب دفعة واحدة عن طريق لصق كود JSON
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="w-full py-4 px-4 lg:px-10 border-dashed border-[#8e735b] border-1 rounded-2xl hover:bg-slate-200 transition-all"
+        >
+          <h4
+            class="text-sm font-black text-[#1b2559] mr-3 mb-5 flex items-center gap-2 pr-3 leading-none"
+          >
+            نموذج جاهز للكتب بصيغة (JSON)
+          </h4>
+          <div class="flex flex-nowrap gap-3 w-full justify-between">
+            <a
+              href="../assets/json/books-json-model.json"
+              download="books-model.json"
+              class="flex items-center justify-center text-center gap-2 w-full py-3 px-4 bg-[#8e735b] border border-slate-200 text-white rounded-xl hover:bg-[#8e735b]/80 transition-all text-xs font-bold shadow-sm"
+            >
+              <i class="fa-solid fa-download text-slate-200"></i>
+              تحميل النموذج
+            </a>
+
+            <button
+              onclick="copyJSONTemplate(this)"
+              class="flex cursor-pointer items-center justify-center text-center gap-2 w-full py-3 px-4 bg-[#1b2559] text-white rounded-xl hover:bg-[#283573] transition-all text-xs font-bold shadow-md active:scale-95"
+            >
+              <i class="fa-solid fa-copy"></i>
+              <span id="btn-text">نسخ النموذج مباشرةًا</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+        <div class="bg-white rounded-[35px] shadow-sm p-6 border border-white">
+          <div class="flex justify-between items-center mb-4 px-2">
+            <span class="text-sm font-bold text-[#1b2559]"
+              >الصق الكود هنا:</span
+            >
+            <button
+              class="text-[10px] bg-slate-100 px-3 py-1 rounded-lg font-bold hover:bg-slate-200 transition"
+            >
+              تنسيق الكود (Format)
+            </button>
+          </div>
+          <textarea
+            dir="ltr"
+            id="jsonInput"
+            spellcheck="false"
+            lang="en"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            placeholder='[{
+    title: "كتاب التوحيد",
+    author: "الإمام محمد بن عبد الوهاب",
+    description: "كتاب التوحيد هو من أهم الكتب في الإسلام، حيث يتناول عقيدة المسلمين ومبادئ الإيمان والتوحيد.",
+    pdfUrl: "https://example.com/tawhid.pdf",
+    pagesNumber: 200,
+    publisher: "دار العلم للنشر",
+    authorDeathYear: 1206,
+}]'
+            class="json-editor w-full h-[500px] bg-slate-900 text-green-400 p-6 rounded-2xl outline-none text-sm leading-relaxed shadow-inner"
+          ></textarea>
+
+          <div class="mt-6 flex gap-4">
+            <button
+              id="validateBtn"
+              class="flex-1 bg-[#8e735b] text-white py-4 rounded-2xl font-black shadow-lg hover:brightness-110 transition"
+            >
+              التجهيز للرفع
+            </button>
+          </div>
+        </div>
+
+        <div
+          class="bg-white rounded-[35px] shadow-sm p-6 border border-white flex flex-col h-full"
+        >
+          <div
+            id="previewArea"
+            class="flex-1 overflow-y-auto space-y-4 pr-2 max-h-[550px] custom-scrollbar"
+          >
+            <div
+              id="booksContainer"
+              class="group border-b border-slate-50 pb-4 last:border-0 hover:bg-slate-50/50 p-3 rounded-2xl transition-all"
+            >
+              <div
+                class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+              >
+                <div class="flex items-center gap-3">
+                  <div
+                    class="w-10 h-10 bg-[#8e735b]/10 text-[#8e735b] rounded-xl flex items-center justify-center"
+                  >
+                    <i class="fa-solid fa-book text-sm"></i>
+                  </div>
+                  <div>
+                    <p
+                      class="text-[10px] text-slate-400 font-bold mb-1 uppercase tracking-tight"
+                    >
+                      عنوان الكتاب
+                    </p>
+                    <h3
+                      class="bookTitle text-sm font-black text-[#1b2559] truncate max-w-[200px]"
+                      title="اسم الكتاب"
+                    >
+                      --------
+                    </h3>
+                  </div>
+                </div>
+
+                <div class="flex flex-col min-w-[180px]">
+                  <label class="text-[10px] font-black text-slate-300 mb-1 mr-1"
+                    >إختر تصينف الكتاب</label
+                  >
+                  <select
+                    id="categorySelect"
+                    class="p-2.5 bg-white border border-slate-200 rounded-xl text-xs font-bold text-[#1b2559] outline-none focus:ring-2 focus:ring-[#8e735b]/20 focus:border-[#8e735b] transition-all cursor-pointer"
+                  >
+                    <option value="">اختر تصنيف</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="statusInfo"
+            class="mt-6 p-4 rounded-2xl bg-[#f4f7fe] flex items-center justify-between"
+          >
+            <div class="flex items-center gap-3">
+              <div
+                class="w-2 h-2 rounded-full bg-[#8e735b] animate-pulse"
+              ></div>
+              <p class="text-[11px] font-black text-slate-500">
+                تم تحليل
+                <span id="booksCount" class="text-[#8e735b] text-sm mx-1"
+                  >0</span
+                >
+                كتب جاهزة
+              </p>
+            </div>
+            <i class="fa-solid fa-circle-info text-slate-300"></i>
+          </div>
+
+          <button
+            type="button"
+            id="uploadBtn"
+            disabled
+            class="mt-4 w-full bg-[#1b2559] text-white py-4 rounded-2xl font-black shadow-xl shadow-blue-900/10 opacity-30 cursor-not-allowed hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-3"
+          >
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            إرسال الكل لقاعدة البيانات
+          </button>
+        </div>
+      </div>
+      <div
+        id="progressOverlay"
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] hidden flex items-center justify-center p-4"
+      >
+        <div
+          class="bg-white rounded-[35px] shadow-2xl w-full max-w-md p-8 text-center border border-white"
+        >
+          <div class="mb-6 relative">
+            <div
+              class="w-20 h-20 border-4 border-slate-100 border-t-[#8e735b] rounded-full animate-spin mx-auto"
+            ></div>
+            <i
+              class="fa-solid fa-cloud-arrow-up absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[#8e735b] text-xl"
+            ></i>
+          </div>
+
+          <h3 class="text-xl font-black text-[#1b2559] mb-2">
+            جاري رفع الكتب...
+          </h3>
+          <p class="text-slate-400 text-sm mb-6" id="progressStatus">
+            يتم الآن حفظ البيانات في قاعدة البيانات
+          </p>
+
+          <div
+            class="w-full flex items-stretch justify-start p-0 bg-slate-100 h-3 rounded-full overflow-hidden mb-4"
+          >
+            <div
+              id="progressBar"
+              class="bg-[#8e735b] h-full w-0 transition-all duration-300 ease-out"
+            ></div>
+          </div>
+
+          <div
+            class="flex justify-between text-[11px] font-black text-slate-500 uppercase tracking-wider"
+          >
+            <span>التقدم: <span id="progressPercent">0</span>%</span>
+            <span
+              >العدد: <span id="currentCount">0</span> /
+              <span id="totalCount">0</span></span
+            >
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      function copyJSONTemplate(btn) {
+        const template = [
+          {
+            title: "",
+            author: "",
+            description: "",
+            pdfUrl: "https://archive.org/embed/...",
+            pagesNumber: 0,
+            publisher: "",
+            authorDeathYear: 0,
+          },
+          {
+            title: "",
+            author: "",
+            description: "",
+            pdfUrl: "https://archive.org/embed/...",
+            pagesNumber: 0,
+            publisher: "",
+            authorDeathYear: 0,
+          },
+          {
+            title: "",
+            author: "",
+            description: "",
+            pdfUrl: "https://archive.org/embed/...",
+            pagesNumber: 0,
+            publisher: "",
+            authorDeathYear: 0,
+          },
+          {
+            title: "",
+            author: "",
+            description: "",
+            pdfUrl: "https://archive.org/embed/...",
+            pagesNumber: 0,
+            publisher: "",
+            authorDeathYear: 0,
+          },
+          {
+            title: "",
+            author: "",
+            description: "",
+            pdfUrl: "https://archive.org/embed/...",
+            pagesNumber: 0,
+            publisher: "",
+            authorDeathYear: 0,
+          },
+        ];
+
+        navigator.clipboard
+          .writeText(JSON.stringify(template, null, 2))
+          .then(() => {
+            // تغيير شكل الزر مؤقتاً لإعطاء إشارة للمستخدم بنجاح العملية
+            const textSpan = btn.querySelector("#btn-text");
+            const icon = btn.querySelector("i");
+
+            const originalText = textSpan.innerText;
+            textSpan.innerText = "تم النسخ بنجاح!";
+            icon.className = "fa-solid fa-check mr-2";
+            btn.classList.add("border-emerald-600", "text-emerald-600");
+
+            setTimeout(() => {
+              textSpan.innerText = originalText;
+              icon.className = "fa-solid fa-copy mr-2";
+              btn.classList.remove("border-emerald-600", "text-emerald-600");
+            }, 2000);
+          });
+      }
+    </script>
+    <script type="module" src="../js/utils/admin-pannel-page.js"></script>
+    <script type="module" src="../js/add-books-json.js"></script>
+  </body>
+</html>

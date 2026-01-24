@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>كيفية الحصول على رابط الكتاب</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary: #8e735b; /* نفس اللون المستخدم في موقعك */
+        --bg-site: #fdfcfb;
+      }
+      body {
+        background-color: var(--bg-site);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="flex items-center justify-center min-h-screen p-4">
+    <div
+      class="w-full max-w-2xl bg-white rounded-[2.5rem] shadow-xl border border-[#e0dcd5] p-6 md:p-10 text-center"
+    >
+      <div
+        class="w-20 h-20 rounded-full bg-[#8e735b]/10 mx-auto flex items-center justify-center mb-6"
+      >
+        <i class="fa-solid fa-circle-info text-[var(--primary)] text-3xl"></i>
+      </div>
+
+      <h1 class="text-2xl font-bold text-slate-800 mb-2">
+        طريقة جلب الرابط من Archive.org
+      </h1>
+      <p class="text-slate-500 mb-8 text-sm">
+        شاهد الفيديو القصير التالي لتعرف كيفية استخراج رابط الـ PDF المباشر
+      </p>
+
+      <div
+        class="relative aspect-video rounded-3xl overflow-hidden shadow-inner bg-slate-100 border-4 border-slate-50 mb-8"
+      >
+        <video
+          class="absolute inset-0 w-full h-full"
+          src="../assets/videos/كيفية إضافة كتاب.mp4"
+          title="شرح جلب الرابط"
+          frameborder="0"
+          allowfullscreen
+          controls
+        ></video>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+        <button
+          onclick="window.close()"
+          class="w-full sm:w-auto px-8 py-4 bg-[var(--primary)] text-white rounded-2xl font-bold shadow-lg hover:brightness-110 transition-all active:scale-95 flex items-center justify-center gap-2"
+        >
+          <i class="fa-solid fa-check-double"></i>
+          فهمت، إكمال إضافة الكتاب
+        </button>
+
+        <a
+          href="javascript:history.back()"
+          class="w-full sm:w-auto px-8 py-4 bg-slate-100 text-slate-500 rounded-2xl font-bold hover:bg-slate-200 transition-all active:scale-95"
+        >
+          رجوع
+        </a>
+      </div>
+
+      <p class="mt-6 text-[10px] text-slate-400">
+        تأكد من اختيار رابط "VBR PDF" للحصول على أفضل جودة وحجم.
+      </p>
+    </div>
+  </body>
+</html>

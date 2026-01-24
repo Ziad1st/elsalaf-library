@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوحة التحكم | تسجيل الخروج</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center h-screen">
+    <button
+      id="logoutBtn"
+      class="bg-red-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-red-700 transition"
+    >
+      <i class="fa-solid fa-right-from-bracket ml-2"></i> تسجيل الخروج
+    </button>
+
+    <div
+      id="logoutModal"
+      class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center"
+    >
+      <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full p-8 mx-4">
+        <div class="text-center mb-6">
+          <div
+            class="inline-flex items-center justify-center w-16 h-16 bg-red-100 text-red-600 rounded-full mb-4"
+          >
+            <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-gray-900">تأكيد تسجيل الخروج</h3>
+          <p class="text-gray-500 mt-2">
+            هل أنت متأكد أنك تريد مغادرة لوحة التحكم؟
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <button
+            id="confirmBtn"
+            class="w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700"
+          >
+            نعم، سجل الخروج
+          </button>
+          <button
+            id="cancelBtn"
+            class="w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-200"
+          >
+            إلغاء
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      // العناصر
+      import { logout } from "../js/utils/logout.js";
+      import { showAlert } from "../js/utils/alertModal.js";
+      const logoutBtn = document.getElementById("logoutBtn");
+      const logoutModal = document.getElementById("logoutModal");
+      const cancelBtn = document.getElementById("cancelBtn");
+      const confirmBtn = document.getElementById("confirmBtn");
+
+      // فتح النافذة
+      logoutBtn.addEventListener("click", () => {
+        logoutModal.classList.remove("hidden");
+      });
+
+      // إغلاق النافذة عند الضغط على إلغاء
+      cancelBtn.addEventListener("click", () => {
+        logoutModal.classList.add("hidden");
+      });
+
+      // إغلاق النافذة عند الضغط خارجها
+      window.addEventListener("click", (e) => {
+        if (e.target === logoutModal) {
+          logoutModal.classList.add("hidden");
+        }
+      });
+
+      // تنفيذ عملية الخروج الفعلي
+      confirmBtn.addEventListener("click", async () => {
+        // 1. مسح البيانات
+        try {
+          confirmBtn.innerText = "جاري الخروج...";
+          confirmBtn.disabled = true;
+
+          const res = await logout();
+          await showAlert(
+            res.message || JSON.stringify(res),
+            "",
+            "success",
+            null,
+          );
+          confirmBtn.innerText = "تم الخروج بنجاح";
+        } catch (error) {
+          await showAlert(error.message || error, "", "error", null);
+          console.error("Error during logout:", error);
+        }
+
+        // 2. رسالة بسيطة قبل التحويل
+
+        // 3. التحويل لصفحة تسجيل الدخول
+      });
+    </script>
+  </body>
+</html>
