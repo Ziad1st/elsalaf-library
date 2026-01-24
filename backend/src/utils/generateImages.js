@@ -1,15 +1,13 @@
 const path = require("path");
 const { createCanvas, registerFont } = require("canvas");
 
-try {
+
     const fontsPath = path.join(process.cwd(), "fonts"); 
     registerFont(path.join(fontsPath, "Cairo-Bold.ttf"), { family: "Cairo", weight: "bold" });
     registerFont(path.join(fontsPath, "Amiri-Regular.ttf"), { family: "Amiri", weight: "normal" });
     registerFont(path.join(fontsPath, "Amiri-Bold.ttf"), { family: "Amiri", weight: "Bold" });
     console.log("Fonts registered successfully");
-} catch (error) {
-    console.error("Error registering fonts:", error);
-}
+
 
 function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
   const words = text.split(" ");
@@ -251,6 +249,7 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
 };
 
 module.exports = { generateUserImage, generateBookCover };
+
 
 
 
