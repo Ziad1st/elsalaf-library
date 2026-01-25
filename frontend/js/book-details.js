@@ -102,13 +102,13 @@ window.addEventListener("click", (e) => {
 
 archiveIframe.onload = function () {
   popupLoader.classList.remove("hidden");
-  console.log("book loading successfully)
+  console.log("book loading successfully")
 
   setTimeout(() => {
     archiveIframe.classList.remove("opacity-0");
     archiveIframe.classList.add("opacity-100");
     popupLoader.classList.add("hidden");
-  }, 1000);
+  }, 500);
 };
 
 const readFromArchiveBtn = document.getElementById("read-from-archive");
@@ -165,4 +165,5 @@ downloadBookBtn.addEventListener("click", async () => {
   bookData = JSON.parse(localStorage.getItem("book"));
   bookDetailtsEls.bookDownloads.textContent = bookData.downloadCount;
 });
+
 
