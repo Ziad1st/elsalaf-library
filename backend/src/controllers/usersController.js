@@ -18,14 +18,14 @@ exports.getUsers = asyncHandler(async (req, res) => {
 
     res.status(200).json(users);
   } else if (searchValue) {
-    const searchWays = [
+    let searchWays = [
       {
         $text: { $search: searchValue },
-      },
+      }
     ];
-    if (isObjectId.isValid(searchValue)) searchWays[0] = { _id: searchValue };
-    else searchWays[0] = { $text: { $search: searchValue } };
-    const users = await User.find({ searchWays[0] }).sort({ createdAt: -1 });
+    if (isObjectId.isValid(searchValue)) searchWays.push({ _id: searchValue });
+    else searchWays = [{ $text: { $search: searchValue } }];
+    const users = await User.find({ $or:searchWays }).sort({ createdAt: -1 });
     console.log(users);
     res.status(200).json(users);
   } else {
