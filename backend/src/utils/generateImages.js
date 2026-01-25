@@ -7,6 +7,9 @@ const fontsPath = path.join(process.cwd(), "fonts");
 try {
     registerFont(path.join(__dirname,"..","..","fonts","Amiri-Regular.ttf"), { family: "Amiri", weight: "normal" });
     registerFont(path.join(__dirname,"..","..","fonts","Amiri-Bold.ttf"), { family: "Amiri", weight: "bold" });
+    registerFont(path.join(__dirname,"..","..","fonts","ElMessiri-Medium.ttf"), { family: "ElMessiri", weight: "600" });
+    registerFont(path.join(__dirname,"..","..","fonts","ElMessiri-SemiBold.ttf"), { family: "ElMessiri", weight: "bold" });
+    registerFont(path.join(__dirname,"..","..","fonts","Rubik-SemiBold.ttf"), { family: "Rubik", weight: "bold" });
 } catch (err) {
     console.error("Failed to register fonts:", err);
 }
@@ -229,7 +232,7 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
   ctx.strokeRect(55, 55, width - 110, height - 110);
 
   // عنوان الكتاب
-  ctx.font = "bold 64px Amiri";
+  ctx.font = "bold 64px Rubik";
   ctx.fillStyle = "#ffffff";
   ctx.textAlign = "center";
 
@@ -252,6 +255,7 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
 };
 
 module.exports = { generateUserImage, generateBookCover };
+
 
 
 
