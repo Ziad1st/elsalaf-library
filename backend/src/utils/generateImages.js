@@ -5,6 +5,7 @@ const { createCanvas, registerFont } = require("canvas");
 const fontsPath = path.join(process.cwd(), "fonts");
 
 try {
+    registerFont(path.join(__dirname,"..","..","fonts","Cairo-Bold.ttf"), { family: "Cairo", weight: "bold" });
     registerFont(path.join(__dirname,"..","..","fonts","Amiri-Regular.ttf"), { family: "Amiri", weight: "normal" });
     registerFont(path.join(__dirname,"..","..","fonts","Amiri-Bold.ttf"), { family: "Amiri", weight: "bold" });
     registerFont(path.join(__dirname,"..","..","fonts","ElMessiri-Medium.ttf"), { family: "ElMessiri", weight: "600" });
@@ -232,7 +233,7 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
   ctx.strokeRect(55, 55, width - 110, height - 110);
 
   // عنوان الكتاب
-  ctx.font = "bold 64px Rubik";
+  ctx.font = "bold 64px ElMessiri";
   ctx.fillStyle = "#ffffff";
   ctx.textAlign = "center";
 
@@ -242,11 +243,11 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
   drawDivider(ctx, width / 2, 420, 220, selected[1]);
 
   // اسم المؤلف
-  ctx.font = "bold 24px Amiri";
+  ctx.font = "bold 24px Cairo";
   ctx.fillText(formatAuthorName(author), width / 2, height - 170);
 
   // اسم الدار
-  ctx.font = "bold 20px 'Amiri', 'Cairo', 'FreeSans', serif";
+  ctx.font = "bold 20px Cairo";
   ctx.globalAlpha = 0.8;
   ctx.fillText(publisher, width / 2, height - 80);
   ctx.globalAlpha = 1;
@@ -255,6 +256,7 @@ const generateBookCover = (bookTitle, author, publisher = "دار النشر") =
 };
 
 module.exports = { generateUserImage, generateBookCover };
+
 
 
 
