@@ -102,6 +102,7 @@ window.addEventListener("click", (e) => {
 
 archiveIframe.onload = function () {
   popupLoader.classList.remove("hidden");
+  console.log("book loading successfully)
 
   setTimeout(() => {
     archiveIframe.classList.remove("opacity-0");
@@ -164,3 +165,4 @@ downloadBookBtn.addEventListener("click", async () => {
   bookData = JSON.parse(localStorage.getItem("book"));
   bookDetailtsEls.bookDownloads.textContent = bookData.downloadCount;
 });
+
