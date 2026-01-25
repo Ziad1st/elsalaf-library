@@ -1,5 +1,6 @@
 import { showAlert } from "./utils/alertModal.js";
 import { confirmModal } from "./utils/confirmModal.js";
+import { loadingDataLayout } from "./utils/loadingDataLayout.js";
 import {
   fetchUserProfile,
   fetchUsers,
@@ -9,7 +10,7 @@ import {
 } from "./utils/protectedFetchs.js";
 let userProfile;
 let users;
-
+loadingDataLayout("on")
 //>> S render users
 const usersContainer = document.getElementById("users-container");
 const renderUsers = async (usersArr = users) => {
@@ -121,6 +122,7 @@ renderUsers();
 //>> E render users
 //>> S update user
 const reRenderUsers = async (filterValue, searchValue) => {
+  loadingDataLayout("on")
   try {
     let users;
     try {
@@ -140,6 +142,8 @@ const reRenderUsers = async (filterValue, searchValue) => {
   } catch (error) {
     console.error(error);
     await showAlert(error.message || error, "", "error", null);
+  } finally{
+      loadingDataLayout("off")
   }
 };
 const updateUserRoleFun = async (userId, role) => {
@@ -313,3 +317,6 @@ searchUsersInput.addEventListener("keyup", async (e) => {
   }
 });
 //>> E search users
+  loadingDataLayout("off")
+
+
