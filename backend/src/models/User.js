@@ -36,8 +36,9 @@ userSchema.index(
   { name: "text", email: "text" },
   {
     default_language: "none",
-    weights: { name: 20, email: 15 },
+    weights: { name: 10, email: 5 },
   },
 );
 
 module.exports = mongoose.model("User", userSchema);
+
