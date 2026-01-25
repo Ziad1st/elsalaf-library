@@ -55,6 +55,9 @@
 │   └── fonts               # الخطوط العربية الاحترافية
 ├── frontend
 │   └── pages               # صفحات HTML و Tailwind
+│   └── js                  # ملفات ال javascript
+│   └── styles              # ال main.css فقط
+│   └── assets              # ملفات الوسائط المستخدمة في الواجه
 └── vercel.json             # إعدادات الرفع السحابي
 
 ```
