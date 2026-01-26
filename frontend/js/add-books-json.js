@@ -64,7 +64,7 @@ const checkBookRequiredData = (books) => {
 };
 
 const bookCard = (book) => `<div
-                class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+                class="flex flex-col md:flex-row md:items-center justify-between gap-4 my-[5px]"
               >
                 <div class="flex items-center gap-3">
                   <div
@@ -247,4 +247,5 @@ uploadBtn.addEventListener("click", async (e) => {
 });
 
 window.onload = () => loadingDataLayout("off");
+
 
