@@ -80,7 +80,7 @@ editBookForm.addEventListener("submit", async (e) => {
   const data = await response.json();
   loadingDataLayout("off");
   if (response.ok) {
-    await showAlert("تم تعديل الكتاب بنجاح", "", "success", "home.html");
-    window.location.href = "home.html";
+    await showAlert("تم تعديل الكتاب بنجاح", "", "success", "admin-books.html");
   }
 });
+
