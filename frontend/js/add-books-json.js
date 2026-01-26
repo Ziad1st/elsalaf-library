@@ -233,8 +233,9 @@ uploadBtn.addEventListener("click", async (e) => {
   for (let book of booksJson) {
     try {
       const response = await fetchCreateOneBook(book);
-      bookUploaded++;
+      
       uploadingProgressLayout("on", bookUploaded);
+      bookUploaded++;
       console.log("response => ", response);
     } catch (error) {
       console.log("error => ", error);
@@ -246,3 +247,4 @@ uploadBtn.addEventListener("click", async (e) => {
 });
 
 window.onload = () => loadingDataLayout("off");
+
