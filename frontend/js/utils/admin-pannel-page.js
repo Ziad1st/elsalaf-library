@@ -271,7 +271,8 @@ confirmBtn.addEventListener("click", async () => {
 
       document.addEventListener('DOMContentLoaded', () => {
 
-    const pageTitle = document.getElementById('page-title');
+   setTimeout(()=>{
+      const pageTitle = document.getElementById('page-title');
 
     const pageIcon = document.getElementById('page-icon');
 
@@ -306,6 +307,7 @@ confirmBtn.addEventListener("click", async () => {
         }
 
     }
+   },1000)
 
 });
 
@@ -356,5 +358,6 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
