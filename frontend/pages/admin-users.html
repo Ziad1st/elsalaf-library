@@ -144,8 +144,7 @@
         <div class="relative flex-1 w-full">
           <input
             type="text"
-            autocomplete="off"
-            
+            autocomplete="off"  
             id="searchUsersInput"
             placeholder="ابحث عن مستخدم بالاسم أو البريد الإلكتروني أو ال ID..."
             class="w-full bg-[#f4f7fe] p-3 pr-11 rounded-xl outline-none focus:ring-2 focus:ring-[#8e735b]/20 text-sm"
@@ -352,7 +351,10 @@
     </div>
         <script type="module" src="../js/utils/admin-pannel-page.js"></script>
 
-    <script type="module">
+    
+
+    <script type="module" src="../js/admin-users.js"></script>
+     <script type="module">
       import { filterUsers } from "../js/admin-users.js";
       window.addEventListener("click", (e) => {
         if (e.target.closest(".filterVal")) {
@@ -371,10 +373,9 @@
         }
       });
     </script>
-
-    <script type="module" src="../js/admin-users.js"></script>
   </body>
 </html>
+
 
 
 
