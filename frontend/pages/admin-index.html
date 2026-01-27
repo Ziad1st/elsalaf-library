@@ -11,22 +11,20 @@
     />
   </head>
   
-  <body class="bg-[#f4f7fe] min-h-screen flex">
-    <header>
-    
-    <button style="    position: fixed;
-        top: 10px;
-    left: 10px;
-    z-index:2000; id=" menu-toggle" class="text-white text-2xl lg:hidden  bg-[#0b1437] p-5  rounded-2xl text-white focus:outline-none hover:text-[#8e735b] transition">
-    <i class="fa-solid fa-bars"></i>
-  </button>
-  </header>
   <body class="bg-[#f4f7fe] min-h-screen flex flex-col lg:flex-row">
-  <button id="menu-toggle" class="fixed top-4 left-4 z-[2000] lg:hidden bg-[#0b1437] p-4 rounded-2xl text-white shadow-xl hover:text-[#8e735b] transition-all active:scale-95">
-    <i class="fa-solid fa-bars"></i>
-  </button>
 
-  <div id="overlay" class="fixed inset-0 bg-black/50 z-[1000] hidden lg:hidden transition-opacity"></div>
+  <nav class="lg:hidden bg-white/80 backdrop-blur-md sticky top-0 z-[1100] flex items-center justify-between p-4 shadow-sm border-b border-slate-200">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 bg-[#0b1437] rounded-lg flex items-center justify-center text-[#8e735b]">
+        <i class="fa-solid fa-book-open text-xs"></i>
+      </div>
+      <span class="font-black text-[#1b2559] text-lg">مكتبة السلف</span>
+    </div>
+    
+    <button id="menu-toggle" class="w-10 h-10 flex items-center justify-center rounded-xl bg-[#f4f7fe] text-[#0b1437] hover:bg-[#8e735b] hover:text-white transition-all shadow-inner">
+      <i class="fa-solid fa-bars-staggered"></i>
+    </button>
+  </nav>
 
   <aside
     id="sidebar"
@@ -152,6 +150,7 @@
     <script type="module" src="../js/admin-index.js"></script>
   </body>
 </html>
+
 
 
 
