@@ -270,46 +270,33 @@ confirmBtn.addEventListener("click", async () => {
 
 
 
-   setTimeout(()=>{
-      const pageTitle = document.getElementById('page-title');
-
+setTimeout(() => {
+    const pageTitle = document.getElementById('page-title');
     const pageIcon = document.getElementById('page-icon');
-
-    const path = window.location;
-
-
+    
+    // استخدام pathname للحصول على اسم الملف الحالي
+    const path = window.location.pathname; 
 
     const pageData = {
-
         'admin-index.html': { title: 'لوحة التحكم', icon: 'fa-chart-pie' },
-
         'admin-books.html': { title: 'إدارة المكتبة', icon: 'fa-book-bookmark' },
-
         'admin-users.html': { title: 'شؤون المستخدمين', icon: 'fa-user-gear' }
-
     };
 
-    
-      console.log(pageTitle)
-      console.log(pageIcon)
+    console.log("العناوين الموجودة:", pageTitle, pageIcon);
 
+    Object.keys(pageData).forEach(key => {
+        console.log("يتم الآن فحص المفتاح:", key);
 
-
-    // البحث عن الصفحة الحالية وتحديث البيانات
-
-     Object.keys(pageData).forEach(key => {
-             console.log(key)
-
-    if (path.includes(key)) {
-      console.log(key)
-        const currentPage = pageData[key]; 
-        
-        pageTitle.innerText = currentPage.title;
-        pageIcon.className = `fa-solid ${currentPage.icon} text-lg`;
-    }
-     
-   
-   },1000)
+        if (path.includes(key)) {
+            console.log("تم العثور على تطابق!", key);
+            const currentPage = pageData[key]; 
+            
+            if (pageTitle) pageTitle.innerText = currentPage.title;
+            if (pageIcon) pageIcon.className = `fa-solid ${currentPage.icon} text-lg`;
+        }
+    });
+}, 500);
 
 
 
@@ -360,6 +347,7 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
 
