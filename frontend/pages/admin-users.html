@@ -67,6 +67,29 @@
       لوحة التحكم
     </h2>
   </div>
+      <script>
+        const pageTitle = document.getElementById('page-title');
+const pageIcon = document.getElementById('page-icon');
+         const currentFileName = window.location.pathname.split("/").pop() || "admin-index.html";
+
+// 3. خريطة البيانات
+const pageDataMap = {
+    'admin-index.html': { title: 'لوحة التحكم', icon: 'fa-chart-pie' },
+    'admin-books.html': { title: 'إدارة المكتبة', icon: 'fa-book-bookmark' },
+    'admin-users.html': { title: 'شؤون المستخدمين', icon: 'fa-user-gear' }
+};
+
+// 4. البحث والتطبيق (مباشرة بدون Loop معقد)
+const activePage = pageDataMap[currentFileName];
+
+if (activePage) {
+    console.log("تم العثور على الصفحة الحالية:", activePage.title);
+    if (pageTitle) pageTitle.innerText = activePage.title;
+    if (pageIcon) pageIcon.className = `fa-solid ${activePage.icon} text-lg`;
+} else {
+    console.log("هذه الصفحة غير مسجلة في قائمة العناوين.");
+}
+      </script>
 </div>
     
     <button id="menu-toggle" class="w-10 h-10 flex items-center justify-center rounded-xl bg-[#f4f7fe] text-[#0b1437] hover:bg-[#8e735b] hover:text-white transition-all shadow-inner">
@@ -375,6 +398,7 @@
     </script>
   </body>
 </html>
+
 
 
 
