@@ -11,7 +11,14 @@
     />
   </head>
   <body class="bg-[#f4f7fe] min-h-screen flex">
+    <div class="lg:hidden p-4 bg-[#0b1437] flex justify-between items-center shadow-lg">
+  <h1 class="text-xl font-black text-[#8e735b] tracking-widest">مكتبة السلف</h1>
+  <button id="menu-toggle" class="text-white text-2xl focus:outline-none hover:text-[#8e735b] transition">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+</div>
     <aside
+      id="sidebar"
       class="w-72 bg-[#0b1437] text-white hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl"
     >
       <div class="p-8 text-center border-b border-slate-700">
@@ -49,6 +56,24 @@
         </a>
       </nav>
     </aside>
+    
+
+    <script>
+      const sidebar = document.getElementById('sidebar');
+const menuToggle = document.getElementById('menu-toggle');
+const menuClose = document.getElementById('menu-close');
+const overlay = document.getElementById('overlay');
+
+function toggleSidebar() {
+    sidebar.classList.toggle('hidden');
+    sidebar.classList.toggle('flex'); // لضمان ظهور المحتوى بشكل عمودي
+    overlay.classList.toggle('hidden');
+}
+
+menuToggle.addEventListener('click', toggleSidebar);
+menuClose.addEventListener('click', toggleSidebar);
+overlay.addEventListener('click', toggleSidebar); // إغلاق عند الضغط خارج القائمة
+    </script>
 
     <main class="flex-1 p-4 lg:p-10 overflow-x-hidden">
       <div
@@ -109,3 +134,4 @@
     <script type="module" src="../js/admin-index.js"></script>
   </body>
 </html>
+
