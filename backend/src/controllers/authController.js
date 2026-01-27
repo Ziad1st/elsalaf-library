@@ -15,7 +15,6 @@ const cookieOptions = {
   httpOnly: true,
   secure: true,
   sameSite: "None",
-  path: "/",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 
@@ -129,3 +128,4 @@ const logoutUser = asyncHandler(async (req, res) => {
 });
 
 module.exports = { registerUser, loginUser, refreshToken, logoutUser };
+
