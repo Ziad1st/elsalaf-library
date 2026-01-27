@@ -61,42 +61,6 @@
     </nav>
   </aside>
 
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const menuToggle = document.getElementById('menu-toggle');
-    const overlay = document.getElementById('overlay');
-
-    function toggleSidebar() {
-      // التحقق من الحالة لضمان عمل الـ Toggle بشكل صحيح
-      const isHidden = sidebar.classList.contains('hidden');
-      
-      if (isHidden) {
-        sidebar.classList.remove('hidden');
-        sidebar.classList.add('flex');
-        overlay.classList.remove('hidden');
-      } else {
-        sidebar.classList.add('hidden');
-        sidebar.classList.remove('flex');
-        overlay.classList.add('hidden');
-      }
-    }
-
-    menuToggle.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleSidebar();
-    });
-
-    // إغلاق السايد بار عند الضغط على الطبقة المظلمة
-    overlay.addEventListener('click', toggleSidebar);
-
-    // إغلاق السايد بار عند الضغط على أي رابط بداخله في الموبايل
-    sidebar.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth < 1024) toggleSidebar();
-      });
-    });
-  </script>
-
     <main class="flex-1 p-4 lg:p-10 overflow-x-hidden">
       <div
         class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4"
@@ -157,6 +121,7 @@
     <script type="module" src="../js/admin-index.js"></script>
   </body>
 </html>
+
 
 
 
