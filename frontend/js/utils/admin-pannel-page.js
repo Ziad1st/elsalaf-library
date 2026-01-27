@@ -293,19 +293,15 @@ confirmBtn.addEventListener("click", async () => {
 
     // البحث عن الصفحة الحالية وتحديث البيانات
 
-    for (const [file, data] of Object.entries(pageData)) {
-
-        if (path.includes(file)) {
-
-            pageTitle.innerText = data.title;
-
-            pageIcon.className = `fa-solid ${data.icon} text-lg`;
-
-            break;
-
-        }
-
+     Object.keys(pageData).forEach(key => {
+    if (path.includes(key)) {
+        const currentPage = pageData[key]; 
+        
+        pageTitle.innerText = currentPage.title;
+        pageIcon.className = `fa-solid ${currentPage.icon} text-lg`;
     }
+     
+   
    },1000)
 
 
@@ -357,6 +353,7 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
 
