@@ -270,7 +270,6 @@ confirmBtn.addEventListener("click", async () => {
 
 
 
-setTimeout(() => {
     const pageTitle = document.getElementById('page-title');
     const pageIcon = document.getElementById('page-icon');
     
@@ -296,7 +295,6 @@ setTimeout(() => {
             if (pageIcon) pageIcon.className = `fa-solid ${currentPage.icon} text-lg`;
         }
     });
-}, 500);
 
 
 
@@ -347,6 +345,7 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
 
