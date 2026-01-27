@@ -24,6 +24,7 @@ const menuToggle = document.getElementById('menu-toggle');
 const overlay = document.getElementById('overlay');
 
 function toggleSidebar() {
+    console.log("toggled")
     const isHidden = sidebar.classList.contains('translate-x-full');
     
     if (isHidden) {
