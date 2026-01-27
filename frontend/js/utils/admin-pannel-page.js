@@ -275,7 +275,7 @@ confirmBtn.addEventListener("click", async () => {
 
     const pageIcon = document.getElementById('page-icon');
 
-    const path = window.location.href;
+    const path = window.location;
 
 
 
@@ -289,12 +289,19 @@ confirmBtn.addEventListener("click", async () => {
 
     };
 
+    
+      console.log(pageTitle)
+      console.log(pageIcon)
+
 
 
     // البحث عن الصفحة الحالية وتحديث البيانات
 
      Object.keys(pageData).forEach(key => {
+             console.log(key)
+
     if (path.includes(key)) {
+      console.log(key)
         const currentPage = pageData[key]; 
         
         pageTitle.innerText = currentPage.title;
@@ -353,6 +360,7 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
 
