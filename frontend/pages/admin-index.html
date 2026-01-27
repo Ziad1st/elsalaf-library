@@ -11,7 +11,11 @@
     />
   </head>
   
-  <header>
+  <header style="    position: fixed;
+    width: 100%;
+    margin-bottom: 100px;
+        top: 0;
+    left: 0;">
     
     <div class="lg:hidden p-4 bg-[#0b1437] flex justify-between items-center shadow-lg">
   <h1 class="text-xl font-black text-[#8e735b] tracking-widest">مكتبة السلف</h1>
@@ -20,7 +24,7 @@
   </button>
 </div>
   </header>
-  <body class="bg-[#f4f7fe] min-h-screen flex">
+  <body class="bg-[#f4f7fe] min-h-screen flex pt-[75px] lg:pt-[10px]">
     <aside
       id="sidebar"
       class="w-72 bg-[#0b1437] text-white hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl"
@@ -138,5 +142,6 @@ overlay.addEventListener('click', toggleSidebar); // إغلاق عند الضغ�
     <script type="module" src="../js/admin-index.js"></script>
   </body>
 </html>
+
 
 
