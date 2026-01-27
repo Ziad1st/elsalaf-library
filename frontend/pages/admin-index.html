@@ -10,13 +10,17 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
   </head>
-  <body class="bg-[#f4f7fe] min-h-screen flex">
+  
+  <header>
+    
     <div class="lg:hidden p-4 bg-[#0b1437] flex justify-between items-center shadow-lg">
   <h1 class="text-xl font-black text-[#8e735b] tracking-widest">مكتبة السلف</h1>
   <button id="menu-toggle" class="text-white text-2xl focus:outline-none hover:text-[#8e735b] transition">
     <i class="fa-solid fa-bars"></i>
   </button>
 </div>
+  </header>
+  <body class="bg-[#f4f7fe] min-h-screen flex">
     <aside
       id="sidebar"
       class="w-72 bg-[#0b1437] text-white hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl"
@@ -134,4 +138,5 @@ overlay.addEventListener('click', toggleSidebar); // إغلاق عند الضغ�
     <script type="module" src="../js/admin-index.js"></script>
   </body>
 </html>
+
 
