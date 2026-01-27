@@ -17,68 +17,84 @@
     <button style="    position: fixed;
         top: 10px;
     left: 10px;
-    z-index:2000; id=" menu-toggle"class="text-white text-2xl lg:hidden  bg-[#0b1437] p-5  rounded-2xl text-white focus:outline-none hover:text-[#8e735b] transition">
+    z-index:2000; id=" menu-toggle" class="text-white text-2xl lg:hidden  bg-[#0b1437] p-5  rounded-2xl text-white focus:outline-none hover:text-[#8e735b] transition">
     <i class="fa-solid fa-bars"></i>
   </button>
   </header>
-  <body class="bg-[#f4f7fe] min-h-screen flex pt-[75px]">
-    <aside
-      id="sidebar"
-      class="w-72 bg-[#0b1437] text-white hidden lg:flex flex-col sticky top-0 h-screen shadow-2xl"
-    >
-      <div class="p-8 text-center border-b border-slate-700">
-        <h1 class="text-2xl font-black text-[#8e735b] tracking-widest">
-          <a class="hover:opacity-70 transition" href="home.html"
-            >مكتبة السلف</a
-          >
-        </h1>
-        <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">
-          لوحة الإدارة الرئيسية
-        </p>
-      </div>
+  <body class="bg-[#f4f7fe] min-h-screen flex flex-col lg:flex-row">
+  <button id="menu-toggle" class="fixed top-4 left-4 z-[2000] lg:hidden bg-[#0b1437] p-4 rounded-2xl text-white shadow-xl hover:text-[#8e735b] transition-all active:scale-95">
+    <i class="fa-solid fa-bars"></i>
+  </button>
 
-      <nav class="flex-1 px-4 py-6 space-y-2">
-        <a
-          href="admin-index.html"
-          class="flex items-center gap-4 p-4 rounded-2xl bg-[#8e735b] shadow-lg shadow-[#8e735b]/20 text-white"
-        >
-          <i class="fa-solid fa-house-chimney"></i>
-          <span class="font-bold">الرئسية</span>
-        </a>
-        <a
-          href="admin-books.html"
-          class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all"
-        >
-          <i class="fa-solid fa-book-open"></i>
-          <span class="font-bold">إدارة الكتب</span>
-        </a>
-        <a
-          href="admin-users.html"
-          class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all"
-        >
-          <i class="fa-solid fa-users"></i>
-          <span class="font-bold">المستخدمين</span>
-        </a>
-      </nav>
-    </aside>
-    
+  <div id="overlay" class="fixed inset-0 bg-black/50 z-[1000] hidden lg:hidden transition-opacity"></div>
 
-    <script>
-      const sidebar = document.getElementById('sidebar');
-const menuToggle = document.getElementById('menu-toggle');
-const menuClose = document.getElementById('menu-close');
-const overlay = document.getElementById('overlay');
+  <aside
+    id="sidebar"
+    class="fixed inset-y-0 right-0 z-[1500] w-72 bg-[#0b1437] text-white hidden lg:flex flex-col lg:sticky lg:top-0 h-screen shadow-2xl transition-all"
+  >
+    <div class="p-8 text-center border-b border-slate-700">
+      <h1 class="text-2xl font-black text-[#8e735b] tracking-widest">
+        <a class="hover:opacity-70 transition" href="home.html">مكتبة السلف</a>
+      </h1>
+      <p class="text-[10px] text-slate-400 mt-1 uppercase tracking-widest">
+        لوحة الإدارة الرئيسية
+      </p>
+    </div>
 
-function toggleSidebar() {
-    sidebar.classList.toggle('hidden');
-    sidebar.classList.toggle('flex'); // لضمان ظهور المحتوى بشكل عمودي
-    overlay.classList.toggle('hidden');
-}
+    <nav class="flex-1 px-4 py-6 space-y-2">
+      <a href="admin-index.html" class="flex items-center gap-4 p-4 rounded-2xl bg-[#8e735b] shadow-lg shadow-[#8e735b]/20 text-white">
+        <i class="fa-solid fa-house-chimney"></i>
+        <span class="font-bold">الرئيسية</span>
+      </a>
+      <a href="admin-books.html" class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+        <i class="fa-solid fa-book-open"></i>
+        <span class="font-bold">إدارة الكتب</span>
+      </a>
+      <a href="admin-users.html" class="flex items-center gap-4 p-4 rounded-2xl text-slate-400 hover:bg-slate-800 hover:text-white transition-all">
+        <i class="fa-solid fa-users"></i>
+        <span class="font-bold">المستخدمين</span>
+      </a>
+    </nav>
+  </aside>
 
-menuToggle.addEventListener('click', toggleSidebar);
-menuClose.addEventListener('click', toggleSidebar);
-overlay.addEventListener('click', toggleSidebar); // إغلاق عند الضغط خارج القائمة
-    </script>
+  <main class="flex-1 p-4 lg:p-8 pt-20 lg:pt-8">
+    </main>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const overlay = document.getElementById('overlay');
+
+    function toggleSidebar() {
+      // التحقق من الحالة لضمان عمل الـ Toggle بشكل صحيح
+      const isHidden = sidebar.classList.contains('hidden');
+      
+      if (isHidden) {
+        sidebar.classList.remove('hidden');
+        sidebar.classList.add('flex');
+        overlay.classList.remove('hidden');
+      } else {
+        sidebar.classList.add('hidden');
+        sidebar.classList.remove('flex');
+        overlay.classList.add('hidden');
+      }
+    }
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleSidebar();
+    });
+
+    // إغلاق السايد بار عند الضغط على الطبقة المظلمة
+    overlay.addEventListener('click', toggleSidebar);
+
+    // إغلاق السايد بار عند الضغط على أي رابط بداخله في الموبايل
+    sidebar.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth < 1024) toggleSidebar();
+      });
+    });
+  </script>
 
     <main class="flex-1 p-4 lg:p-10 overflow-x-hidden">
       <div
@@ -139,6 +155,7 @@ overlay.addEventListener('click', toggleSidebar); // إغلاق عند الضغ�
     <script type="module" src="../js/admin-index.js"></script>
   </body>
 </html>
+
 
 
 
