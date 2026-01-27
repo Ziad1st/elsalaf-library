@@ -276,7 +276,7 @@ confirmBtn.addEventListener("click", async () => {
 
     const pageIcon = document.getElementById('page-icon');
 
-    const path = window.location.pathname;
+    const path = window.location.href;
 
 
 
@@ -325,7 +325,7 @@ function toggleSidebar() {
 
     console.log("toggled")
 
-    const isHidden = sidebar.classList.contains('translate-x-full');
+    const isHidden = sidebar.classList.contains('hidden');
 
     
 
@@ -358,6 +358,7 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
 
