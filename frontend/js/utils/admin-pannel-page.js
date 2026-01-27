@@ -142,27 +142,25 @@ const currentPage = window.location.pathname.split("/").pop();
     const pageTitle = document.getElementById('page-title');
     const pageIcon = document.getElementById('page-icon');
     
-    // استخدام pathname للحصول على اسم الملف الحالي
+   const currentFileName = window.location.pathname.split("/").pop() || "admin-index.html";
 
-    const pageData = {
-        'admin-index.html': { title: 'لوحة التحكم', icon: 'fa-chart-pie' },
-        'admin-books.html': { title: 'إدارة المكتبة', icon: 'fa-book-bookmark' },
-        'admin-users.html': { title: 'شؤون المستخدمين', icon: 'fa-user-gear' }
-    };
+// 3. خريطة البيانات
+const pageDataMap = {
+    'admin-index.html': { title: 'لوحة التحكم', icon: 'fa-chart-pie' },
+    'admin-books.html': { title: 'إدارة المكتبة', icon: 'fa-book-bookmark' },
+    'admin-users.html': { title: 'شؤون المستخدمين', icon: 'fa-user-gear' }
+};
 
-    console.log("العناوين الموجودة:", pageTitle, pageIcon);
+// 4. البحث والتطبيق (مباشرة بدون Loop معقد)
+const activePage = pageDataMap[currentFileName];
 
-    Object.keys(pageData).forEach(key => {
-        console.log("يتم الآن فحص المفتاح:", key);
-
-        if (currentPage==key) {
-            console.log("تم العثور على تطابق!", key);
-            const currentPage = pageData[key]; 
-            
-            if (pageTitle) pageTitle.innerText = currentPage.title;
-            if (pageIcon) pageIcon.className = `fa-solid ${currentPage.icon} text-lg`;
-        }
-    });
+if (activePage) {
+    console.log("تم العثور على الصفحة الحالية:", activePage.title);
+    if (pageTitle) pageTitle.innerText = activePage.title;
+    if (pageIcon) pageIcon.className = `fa-solid ${activePage.icon} text-lg`;
+} else {
+    console.log("هذه الصفحة غير مسجلة في قائمة العناوين.");
+}
 const protectePages = async () => {
   if (
     (userProfile?.role !== "admin" || userProfile?.status === "banned") &&
@@ -345,6 +343,7 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
 
