@@ -325,7 +325,7 @@ function toggleSidebar() {
 
     console.log("toggled")
 
-    const isHidden = sidebar.classList.contains('hidden');
+    const isHidden = sidebar.classList.contains('translate-x-full') || sidebar.classList.contains('hidden');
 
     
 
@@ -358,6 +358,7 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
 
