@@ -24,6 +24,8 @@ exports.getUsers = asyncHandler(async (req, res) => {
       }
     ];
     if (isObjectId.isValid(searchValue)) searchWays.push({ _id: searchValue });
+    else if(searchValue.includes("@")&&searchValue.includes("."))
+      searchWays = [{email:searchValue}]
     else searchWays = [{ $text: { $search: searchValue } }];
     const users = await User.find({ $or:searchWays }).sort({ createdAt: -1 });
     console.log(users);
@@ -83,4 +85,5 @@ exports.countUsers = asyncHandler(async (req, res) => {
   console.log("countUsers", count);
   res.status(200).json({ count });
 });
+
 
