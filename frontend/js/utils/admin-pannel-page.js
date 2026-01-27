@@ -138,6 +138,31 @@ const protectedPagesHrefs = {
 };
 
 const currentPage = window.location.pathname.split("/").pop();
+
+    const pageTitle = document.getElementById('page-title');
+    const pageIcon = document.getElementById('page-icon');
+    
+    // استخدام pathname للحصول على اسم الملف الحالي
+
+    const pageData = {
+        'admin-index.html': { title: 'لوحة التحكم', icon: 'fa-chart-pie' },
+        'admin-books.html': { title: 'إدارة المكتبة', icon: 'fa-book-bookmark' },
+        'admin-users.html': { title: 'شؤون المستخدمين', icon: 'fa-user-gear' }
+    };
+
+    console.log("العناوين الموجودة:", pageTitle, pageIcon);
+
+    Object.keys(pageData).forEach(key => {
+        console.log("يتم الآن فحص المفتاح:", key);
+
+        if (currentPage==key) {
+            console.log("تم العثور على تطابق!", key);
+            const currentPage = pageData[key]; 
+            
+            if (pageTitle) pageTitle.innerText = currentPage.title;
+            if (pageIcon) pageIcon.className = `fa-solid ${currentPage.icon} text-lg`;
+        }
+    });
 const protectePages = async () => {
   if (
     (userProfile?.role !== "admin" || userProfile?.status === "banned") &&
@@ -270,31 +295,6 @@ confirmBtn.addEventListener("click", async () => {
 
 
 
-    const pageTitle = document.getElementById('page-title');
-    const pageIcon = document.getElementById('page-icon');
-    
-    // استخدام pathname للحصول على اسم الملف الحالي
-    const path = window.location.pathname; 
-
-    const pageData = {
-        'admin-index.html': { title: 'لوحة التحكم', icon: 'fa-chart-pie' },
-        'admin-books.html': { title: 'إدارة المكتبة', icon: 'fa-book-bookmark' },
-        'admin-users.html': { title: 'شؤون المستخدمين', icon: 'fa-user-gear' }
-    };
-
-    console.log("العناوين الموجودة:", pageTitle, pageIcon);
-
-    Object.keys(pageData).forEach(key => {
-        console.log("يتم الآن فحص المفتاح:", key);
-
-        if (path.includes(key)) {
-            console.log("تم العثور على تطابق!", key);
-            const currentPage = pageData[key]; 
-            
-            if (pageTitle) pageTitle.innerText = currentPage.title;
-            if (pageIcon) pageIcon.className = `fa-solid ${currentPage.icon} text-lg`;
-        }
-    });
 
 
 
@@ -345,6 +345,7 @@ function toggleSidebar() {
 menuToggle.addEventListener('click', toggleSidebar);
 
 overlay.addEventListener('click', toggleSidebar);
+
 
 
 
