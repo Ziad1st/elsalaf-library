@@ -28,7 +28,9 @@ const renderUsers = async (usersArr = users) => {
     await showAlert(error.message || error, "", "error", null);
     return;
   } finally{
-      loadingDataLayout("off")
+      setTimeout(()=>{
+        loadingDataLayout("off")
+      },1000) 
   }
   
   const userCardLayout = (userData) => {
@@ -321,6 +323,7 @@ searchUsersInput.addEventListener("keyup", async (e) => {
 });
 //>> E search users
 window.onload = loadingDataLayout("off");
+
 
 
 
