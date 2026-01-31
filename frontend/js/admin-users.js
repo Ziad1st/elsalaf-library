@@ -10,11 +10,10 @@ import {
 } from "./utils/protectedFetchs.js";
 let userProfile;
 let users;
-loadingDataLayout("on")
+  loadingDataLayout("on","جاري تحميل المستخدمين...")
 //>> S render users
 const usersContainer = document.getElementById("users-container");
 const renderUsers = async (usersArr = users) => {
-  loadingDataLayout("on","جاري تحميل المستخدمين...")
   try {
     userProfile = await fetchUserProfile();
     users = await fetchUsers();
@@ -321,7 +320,8 @@ searchUsersInput.addEventListener("keyup", async (e) => {
   }
 });
 //>> E search users
-  loadingDataLayout("off")
+window.onload = loadingDataLayout("off");
+
 
 
 
