@@ -1,6 +1,7 @@
+import { loadingDataLayout } from "./utils/loadingDataLayout.js";
+loadingDataLayout("on","جاري تحميل المستخدمين...")
 import { showAlert } from "./utils/alertModal.js";
 import { confirmModal } from "./utils/confirmModal.js";
-import { loadingDataLayout } from "./utils/loadingDataLayout.js";
 import {
   fetchUserProfile,
   fetchUsers,
@@ -10,11 +11,12 @@ import {
 } from "./utils/protectedFetchs.js";
 let userProfile;
 let users;
-  loadingDataLayout("on","جاري تحميل المستخدمين...")
 //>> S render users
 const usersContainer = document.getElementById("users-container");
 const renderUsers = async (usersArr = users) => {
   try {
+    loadingDataLayout("on","إنتظر قليلا...")
+
     userProfile = await fetchUserProfile();
     users = await fetchUsers();
     if (!users[0]) {
@@ -323,6 +325,7 @@ searchUsersInput.addEventListener("keyup", async (e) => {
 });
 //>> E search users
 window.onload = loadingDataLayout("off");
+
 
 
 
