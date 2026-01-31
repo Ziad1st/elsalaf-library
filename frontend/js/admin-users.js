@@ -14,6 +14,7 @@ loadingDataLayout("on")
 //>> S render users
 const usersContainer = document.getElementById("users-container");
 const renderUsers = async (usersArr = users) => {
+  loadingDataLayout("on","جاري تحميل المستخدمين...")
   try {
     userProfile = await fetchUserProfile();
     users = await fetchUsers();
@@ -27,6 +28,8 @@ const renderUsers = async (usersArr = users) => {
     console.error(error);
     await showAlert(error.message || error, "", "error", null);
     return;
+  } finally{
+      loadingDataLayout("off")
   }
   
   const userCardLayout = (userData) => {
@@ -123,7 +126,7 @@ renderUsers();
 //>> E render users
 //>> S update user
 const reRenderUsers = async (filterValue, searchValue) => {
-  loadingDataLayout("on")
+  loadingDataLayout("on","عرض المستخدمين...")
   try {
     let users;
     try {
@@ -319,6 +322,7 @@ searchUsersInput.addEventListener("keyup", async (e) => {
 });
 //>> E search users
   loadingDataLayout("off")
+
 
 
 
