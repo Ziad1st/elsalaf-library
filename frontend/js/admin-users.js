@@ -28,6 +28,7 @@ const renderUsers = async (usersArr = users) => {
     await showAlert(error.message || error, "", "error", null);
     return;
   }
+  
   const userCardLayout = (userData) => {
     return `
             <tr user-id="${userData._id}" title="show user details" class="user-row transition-all ${userData._id === userProfile.user._id ? "bg-[#1b2559] border-r-[3px] border-b-[2px] border-t-[2px] border-[#1b2559] border-b-0 hover:bg-[#1b2559] " : " border-r-3 border-r-[#e0dcd5]  hover:bg-[lavender] hover:border-r-[#1b2559] cursor-pointer"}">
@@ -318,5 +319,6 @@ searchUsersInput.addEventListener("keyup", async (e) => {
 });
 //>> E search users
   loadingDataLayout("off")
+
 
 
