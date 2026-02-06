@@ -32,6 +32,7 @@ export const loadingDataLayout = (
     </div>`;
 
   document.body.style.overflow = "hidden";
+  loadingLayout.style.zIndex = "100000000"
   // منع اهتزاز الشاشة عند اختفاء السكرول
   if (scrollBarWidth > 0) {
     document.body.style.paddingRight = `${scrollBarWidth}px`;
@@ -39,3 +40,4 @@ export const loadingDataLayout = (
 
   document.body.appendChild(loadingLayout);
 };
+
