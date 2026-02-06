@@ -215,6 +215,7 @@ const renderUserDetails = async (user) => {
   modalUserEmail.textContent = user.email;
   goToUserBooksBtn.href = `admin-books.html?user=${user._id}`;
   goToUserBooksBtn.target = "_blank";
+  
   publisherBooksCount.textContent =
     (await countOfBooksAddedByUser(user._id)) || "لم يضف أي كتب";
   if ((await countOfBooksAddedByUser(user._id)) == 0 || user.role == "user") {
@@ -238,9 +239,12 @@ const renderUserDetails = async (user) => {
 };
 const showUserDetails = (userId) => {
   userModalPopup.classList.remove("hidden");
+  userModalPopup.style.zIndex = "100000"
   console.log("Showing details for user:", userId);
+  loadingDataLayout("on","تحميل بيانات المستخدم...")
   const user = users.find((u) => u._id.trim() === userId.trim());
-  renderUserDetails(user);
+  await renderUserDetails(user);
+  loadingDataLayout("off")
   console.log(user);
 };
 //>> S show user details
@@ -325,6 +329,7 @@ searchUsersInput.addEventListener("keyup", async (e) => {
 });
 //>> E search users
 window.onload = loadingDataLayout("off");
+
 
 
 
