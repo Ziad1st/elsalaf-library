@@ -237,7 +237,7 @@ const renderUserDetails = async (user) => {
     goToUserBooksBtn.textContent = "الذهاب للكتب التي أضافها المستخدم";
   }
 };
-const showUserDetails = (userId) => {
+const showUserDetails = async (userId) => {
   userModalPopup.classList.remove("hidden");
   userModalPopup.style.zIndex = "100000"
   console.log("Showing details for user:", userId);
@@ -329,6 +329,7 @@ searchUsersInput.addEventListener("keyup", async (e) => {
 });
 //>> E search users
 window.onload = loadingDataLayout("off");
+
 
 
 
