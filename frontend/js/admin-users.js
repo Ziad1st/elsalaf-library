@@ -328,7 +328,7 @@ searchUsersInput.addEventListener("keyup", async (e) => {
   }
 });
 //>> E search users
-window.onload = loadingDataLayout("off");
+
 
 
 
