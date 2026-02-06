@@ -71,6 +71,7 @@ const renderArrBooksToDom = async (BooksArr) => {
   BooksArr = BooksArr ? BooksArr : await booksData;
   allBooksGrid.innerHTML = DomRenderHtml("array", bookCard, BooksArr);
   booksCountEl.textContent = allBooksGrid.childElementCount;
+      window.scrollTo(0, 0);
 };
 renderArrBooksToDom();
 
@@ -133,3 +134,4 @@ window.addEventListener("click", async (e) => {
   }
 });
 window.onload = loadingDataLayout("off");
+
